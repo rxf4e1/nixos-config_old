@@ -45,7 +45,7 @@
                   ./modules/home-manager/progs.nix
                   ./modules/home-manager/git.nix
                   # ./modules/home-manager/serv.nix
-                  # ./modules/home-manager/emacs.nix
+                  ./modules/home-manager/emacs.nix
                   # ./modules/home-manager/neovim.nix
                   ./modules/home-manager/zsh.nix
                 ];

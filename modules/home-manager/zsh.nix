@@ -47,14 +47,14 @@
       gsb  = "git status -sb";
 
       cat  = "bat";
-      ls   = "exa -h --git --group-directories-first --sort=type --classify -s extension --icons";
+      ls   = "exa -lh --git --group-directories-first --sort=type --classify -s extension --icons";
       l    = "ls -lF --time-style=long-iso --grid --icons";
       la   = "ls -lha";
       sl   = "ls";
       tree = "ls --tree";
       cdd  = "cd /media/data";
       cdf  = "cd /media/data/00-09-configs/01-NixOS/01.01-flakes";
-      x    = "startx";
+      x    = "sway";
     };
   };      
 }
