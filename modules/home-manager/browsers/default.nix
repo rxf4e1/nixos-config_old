@@ -6,10 +6,10 @@
 
   programs.qutebrowser = {
     enable = true;
-    package = pkgs.qutebrowser;
+    # package = pkgs.qutebrowser;
     enableDefaultBindings = true;
-    extraConfig = ''
+    # extraConfig = ''
       # Extra lines added to config.py file.
-    '';
+    # '';
   };
 }

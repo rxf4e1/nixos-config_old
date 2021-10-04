@@ -53,7 +53,7 @@
       sl   = "ls";
       tree = "ls --tree";
       cdd  = "cd /media/data";
-      cdf  = "cd /media/data/00-09-configs/01-NixOS/01.01-flakes";
+      cdf  = "cd /media/data/00-09-configs/01-NixOS/01.10-flakes";
       x    = "sway";
     };
   };      

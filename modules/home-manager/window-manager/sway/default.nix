@@ -2,13 +2,15 @@
 
 let
 
+  cfg = config.wayland.windowManager.sway.config;
+
   fontConf = {
     names = [ "TerminessTTF Nerd Font Mono" ];
     style = "Normal";
     size = 10.0;
   };
 
-  cfg = config.wayland.windowManager.sway.config;
+  wallpaper = ".walls/cyberpunk_2077.jpg";
 
 in {
   home.packages = with pkgs; [
@@ -25,10 +27,10 @@ in {
     BEMENU_BACKEND = "wayland";
     CLUTTER_BACKEND = "wayland";
     GDK_BACKEND = "wayland";
-    GDK_DPI_SCALE = 1;
+    # GDK_DPI_SCALE = 1;
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland-egl";
-    QT_WAYLAND_FORCE_DPI = "physical";
+    # QT_WAYLAND_FORCE_DPI = "physical";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
     SDL_VIDEODRIVER = "wayland";
     WLR_NO_HARDWARE_CURSORS = 1;
@@ -41,15 +43,16 @@ in {
       sway = {
         enable = true;
         wrapperFeatures.gtk = true;
-        config = rec {
+        config = {
 
           output."*" = {
-            bg = "$HOME/Downloads/imgs/qwe_download.jpg fill";
+            bg = "${wallpaper} fill";
           };
 
-          input."*" = {
+          input."type:keyboard" = {
             xkb_layout = "br";
             xkb_variant = "abnt2";
+            # xkb_numlock = "enable";
           };
           
           modifier = "Mod4";
@@ -147,6 +150,8 @@ in {
             "--locked XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
             "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+            # Resize mode
+            "${cfg.modifier}+r" = "mode resize";
             # Start Programs
             "${cfg.modifier}+e" = ''exec emacsclient -c -a "" "$@"'';
             "${cfg.modifier}+q" = "exec qutebrowser";

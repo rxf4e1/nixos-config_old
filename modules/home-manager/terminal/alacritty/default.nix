@@ -3,7 +3,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      background_opacity = 1.0;
+      background_opacity = 0.96;
       font = {
         size = 10;
         normal.family = "TerminessTTF Nerd Font Mono";

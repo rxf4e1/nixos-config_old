@@ -15,7 +15,6 @@
   outputs =
     inputs @ { self, master, unstable, ...}:
     {
-      
       nixosConfigurations = {
         nixos = unstable.lib.nixosSystem {
           system = "x86_64-linux";
@@ -38,11 +37,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.rxf4el = {
-                imports = [
-                  ./modules/home-manager
-                  #./modules/home-manager/git.nix
-                  #./modules/home-manager/progs.nix
-                ];
+                imports = [ ./modules/home-manager ];
               };
             }
           ];
