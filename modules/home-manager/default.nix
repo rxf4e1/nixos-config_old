@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./browsers/
+    ./browsers
     ./editor
     ./git
     ./security

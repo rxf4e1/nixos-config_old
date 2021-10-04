@@ -40,8 +40,8 @@
               home-manager.users.rxf4el = {
                 imports = [
                   ./modules/home-manager
-                  ./modules/home-manager/git.nix
-                  ./modules/home-manager/progs.nix
+                  #./modules/home-manager/git.nix
+                  #./modules/home-manager/progs.nix
                 ];
               };
             }
