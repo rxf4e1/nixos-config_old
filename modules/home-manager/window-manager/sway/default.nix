@@ -13,6 +13,7 @@ let
 in {
   home.packages = with pkgs; [
     autotiling
+    brightnessctl
     kanshi 
     mako
     wl-clipboard

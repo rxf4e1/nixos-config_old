@@ -2,9 +2,12 @@
 
 {
   imports = [
+    ./browsers/
     ./editor
-    ./terminal
-    ./window-manager
+    ./git
     ./security
+    ./terminal
+    ./utils
+    ./window-manager
   ];
 }

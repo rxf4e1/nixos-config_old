@@ -2,7 +2,7 @@
 {
   imports = [
     ./gtk
-    ./i3
+    # ./i3
     ./sway
   ];
 }

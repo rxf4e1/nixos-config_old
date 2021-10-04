@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [
+  home.packages = with pkgs; [
     keepassxc
     pass
   ];
   
-  home.file.".authinfo".source = ../../config/authinfo;
+  home.file.".authinfo".source = ../../../config/authinfo;
 }
