@@ -10,7 +10,7 @@ let
     size = 10.0;
   };
 
-  wallpaper = ".walls/cyberpunk_2077.jpg";
+  wallpaper = "/media/data/10-19-docs/12-images/wallpapers/cyberpunk_2077.jpg";
 
 in {
   home.packages = with pkgs; [
