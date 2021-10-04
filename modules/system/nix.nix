@@ -9,9 +9,9 @@
       keep-derivations = true
     '';
     autoOptimiseStore = true;
-    #allowedUsers = ["@wheels"];
-    #trustedUsers = ["@wheels"];
-    #useSandbox = true;
+    allowedUsers = ["@wheels" "rxf4el" "root" ];
+    trustedUsers = ["@wheels" "rxf4el" "root" ];
+    useSandbox = true;
     maxJobs = 8;
     gc = {
       automatic = true;

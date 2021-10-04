@@ -39,15 +39,9 @@
               home-manager.useUserPackages = true;
               home-manager.users.rxf4el = {
                 imports = [
-                  # ./modules/home-manager/wm.nix
-                  ./modules/home-manager/sway.nix
-                  ./modules/home-manager/alacritty.nix
-                  ./modules/home-manager/progs.nix
+                  ./modules/home-manager
                   ./modules/home-manager/git.nix
-                  # ./modules/home-manager/serv.nix
-                  ./modules/home-manager/emacs.nix
-                  # ./modules/home-manager/neovim.nix
-                  ./modules/home-manager/zsh.nix
+                  ./modules/home-manager/progs.nix
                 ];
               };
             }
