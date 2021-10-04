@@ -157,7 +157,9 @@ in {
             "${cfg.modifier}+q" = "exec qutebrowser";
           };
 
-          # startup = [ ];
+          startup = [ 
+            { command = "autotiling"; }
+          ];
         }; # end config #
         
       };
