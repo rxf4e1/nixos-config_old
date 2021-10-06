@@ -6,5 +6,5 @@
     pass
   ];
   
-  home.file.".authinfo".source = ../../../config/authinfo;
+  home.file.".authinfo".source = ../../../config/authinfo.gpg;
 }
