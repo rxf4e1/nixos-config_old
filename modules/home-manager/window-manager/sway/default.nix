@@ -20,23 +20,9 @@ in {
     mako
     wl-clipboard
     bemenu
+    wdisplays
     xwayland
   ];
-
-  home.sessionVariables = {
-    BEMENU_BACKEND = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    GDK_BACKEND = "wayland";
-    # GDK_DPI_SCALE = 1;
-    MOZ_ENABLE_WAYLAND = 1;
-    QT_QPA_PLATFORM = "wayland-egl";
-    # QT_WAYLAND_FORCE_DPI = "physical";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
-    SDL_VIDEODRIVER = "wayland";
-    WLR_NO_HARDWARE_CURSORS = 1;
-    _JAVA_AWT_WM_NONREPARENTING = 1;
-    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on";
-  };
 
   wayland = {
     windowManager = {
@@ -45,8 +31,15 @@ in {
         wrapperFeatures.gtk = true;
         config = {
 
-          output."*" = {
-            bg = "${wallpaper} fill";
+          output = { 
+            "*" = {
+              bg = "${wallpaper} fill";
+            };
+            "eDP-1" = {
+              scale = "1.0";
+              # max_render_time = "1";
+              # adaptative_sync = "on";
+            };
           };
 
           input."type:keyboard" = {
@@ -93,7 +86,6 @@ in {
             "${cfg.modifier}+${cfg.down}" = "focus down";
             "${cfg.modifier}+${cfg.up}" = "focus up";
             "${cfg.modifier}+${cfg.right}" = "focus right";
-
             "${cfg.modifier}+Left" = "focus left";
             "${cfg.modifier}+Down" = "focus down";
             "${cfg.modifier}+Up" = "focus up";
@@ -103,7 +95,6 @@ in {
             "${cfg.modifier}+Shift+${cfg.down}" = "move down";
             "${cfg.modifier}+Shift+${cfg.up}" = "move up";
             "${cfg.modifier}+Shift+${cfg.right}" = "move right";
-
             "${cfg.modifier}+Shift+Left" = "move left";
             "${cfg.modifier}+Shift+Down" = "move down";
             "${cfg.modifier}+Shift+Up" = "move up";
@@ -119,7 +110,6 @@ in {
             "${cfg.modifier}+8" = "workspace number 8";
             "${cfg.modifier}+9" = "workspace number 9";
             "${cfg.modifier}+0" = "workspace number 10";
-
             "${cfg.modifier}+Shift+1" = "move container to workspace number 1";
             "${cfg.modifier}+Shift+2" = "move container to workspace number 2";
             "${cfg.modifier}+Shift+3" = "move container to workspace number 3";
@@ -135,7 +125,6 @@ in {
             "${cfg.modifier}+Control+${cfg.down}" = "move workspace to output down";
             "${cfg.modifier}+Control+${cfg.up}" = "move workspace to output up";
             "${cfg.modifier}+Control+${cfg.right}" = "move workspace to output right";
-
             "${cfg.modifier}+Control+Left" = "move workspace to output left";
             "${cfg.modifier}+Control+Down" = "move workspace to output down";
             "${cfg.modifier}+Control+Up" = "move workspace to output up";
@@ -143,6 +132,19 @@ in {
             # Splits
             "${cfg.modifier}+b" = "splith";
             "${cfg.modifier}+v" = "splitv";
+            # Layouts
+            "${cfg.modifier}+s" = "layout stacking";
+            "${cfg.modifier}+t" = "layout tabbed";
+            "${cfg.modifier}+e" = "layout toggle split";
+            "${cfg.modifier}+f" = "fullscreen toggle";
+            "${cfg.modifier}+a" = "focus parent";
+            "${cfg.modifier}+Control+space" = "floating toggle";
+            "${cfg.modifier}+space" = "focus mode_toggle";
+            # Scratchpad
+            "${cfg.modifier}+Shift+minus" = "move scratchpad";
+            "${cfg.modifier}+minus" = "scratchpad show";
+            # Resize mode
+            "${cfg.modifier}+r" = "mode resize";
             # Multimedia Keys
             "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
             "XF86AudioMicMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
@@ -150,11 +152,16 @@ in {
             "--locked XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
             "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
-            # Resize mode
-            "${cfg.modifier}+r" = "mode resize";
             # Start Programs
-            "${cfg.modifier}+e" = ''exec emacsclient -c -a "" "$@"'';
             "${cfg.modifier}+q" = "exec qutebrowser";
+            "${cfg.modifier}+Shift+Return" = ''exec emacsclient -c -a "" "$@"'';
+          };
+
+          assigns = {
+            "1: www"   = [ { app_id = "org.qutebrowser.qutebrowser"; } ];
+            # "2" = [ { app_id = ""; } ];
+            "3: edit"  = [ { app_id = "emacs"; } ];
+            "10: xxx"  = [ { class = "Brave-browser"; } ];
           };
 
           startup = [ 
@@ -175,4 +182,30 @@ in {
       After = [ "graphical-session-pre.target" ];
     };
   };
+
+  programs.zsh.initExtra = /* sh */ ''
+    if [[ -z $WAYLAND_DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+        # otherwise set tty
+        export XDG_SESSION_TYPE="wayland"
+        # otherwise sessionVariables are not updated
+        unset __HM_SESS_VARS_SOURCED __NIXOS_SET_ENVIRONMENT_DONE
+        exec systemd-cat -t sway sway
+    fi
+  '';
+
+  home.sessionVariables = {
+    BEMENU_BACKEND = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    GDK_BACKEND = "wayland";
+    GDK_DPI_SCALE = 1;
+    MOZ_ENABLE_WAYLAND = 1;
+    QT_QPA_PLATFORM = "wayland-egl";
+    # QT_WAYLAND_FORCE_DPI = "physical";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+    SDL_VIDEODRIVER = "wayland";
+    WLR_NO_HARDWARE_CURSORS = 1;
+    _JAVA_AWT_WM_NONREPARENTING = 1;
+    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on";
+  };
+
 }
