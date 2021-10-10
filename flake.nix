@@ -27,11 +27,7 @@
           modules = [
             # System
             ./hosts/aspire-a315
-            ./modules/system/amdgpu.nix
-            ./modules/system/nix.nix
-            ./modules/system/progs.nix
-            ./modules/system/serv.nix
-            ./modules/system/users.nix
+            ./modules/system
             # Home-manager
             inputs.home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;

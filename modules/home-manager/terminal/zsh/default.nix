@@ -39,14 +39,36 @@
       }
     ];
 
+#     initExtra = ''
+#       # check existence of a given cmd
+#       cmd_exist() {
+#         command -v "$1" /dev/null
+#         return $?
+#       }
+# 
+#       # ls alias ----------
+#       cmd_exist "exa"
+#       if [ "$?" -eq 0 ]; then
+#         alias ls="exa -lh --git --group-directories-first --sort=type --classify -s extension --icons"
+#         alias l="ls -lF --time-style=long-iso --grid --icons"
+#       else
+#         alias ls="ls --group-directories-first --color=auto -plh"
+#       fi
+# 
+#       # cat alias ----------
+#       cmd_exist "bat"
+#       if [ "$?" -eq 0 ]; then
+#         alias cat="bat -pp"
+#         alias less="bat --paging=always"
+#         export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#     '';
+
     shellAliases = {
       ga   = "git add";
       gc   = "git commit";
       gcm  = "git commit -m";
       gs   = "git status";
       gsb  = "git status -sb";
-
-      cat  = "bat";
       ls   = "exa -lh --git --group-directories-first --sort=type --classify -s extension --icons";
       l    = "ls -lF --time-style=long-iso --grid --icons";
       la   = "ls -lha";

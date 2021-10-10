@@ -166,6 +166,7 @@ in {
 
           startup = [ 
             { command = "autotiling"; }
+            # { command = "emacs --daemon" }
           ];
         }; # end config #
         

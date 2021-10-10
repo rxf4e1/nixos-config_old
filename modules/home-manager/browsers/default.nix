@@ -6,10 +6,16 @@
 
   programs.qutebrowser = {
     enable = true;
-    # package = pkgs.qutebrowser;
+    settings = {
+      fonts = {
+        default_size = "7pt";
+      };
+    };
+    searchEngines = {
+      nw = "https://nixos.wiki/index.php?search={}";
+      no = "https://search.nixos.org/packages?query={}";
+      g  = "https://www.google.com/search?hl=en&q={}";
+    };
     enableDefaultBindings = true;
-    # extraConfig = ''
-      # Extra lines added to config.py file.
-    # '';
   };
 }

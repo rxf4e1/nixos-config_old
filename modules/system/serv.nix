@@ -32,5 +32,10 @@
         startx.enable = true;
       };
     };
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql;
+      # dataDir = "/var/lib/postgresql/$psqlSchema";
+    };
   };
 }
