@@ -4,6 +4,7 @@
     enable = true;
     initExtraFirst = ''
       export PATH="$XDG_BIN_HOME:$PATH"
+      export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     '';
     plugins = [
       {
@@ -69,6 +70,9 @@
       gcm  = "git commit -m";
       gs   = "git status";
       gsb  = "git status -sb";
+
+      cat  = "bat";
+      less = "bat --paging=always";
       ls   = "exa -lh --git --group-directories-first --sort=type --classify -s extension --icons";
       l    = "ls -lF --time-style=long-iso --grid --icons";
       la   = "ls -lha";

@@ -25,9 +25,11 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
+
             # System
             ./hosts/aspire-a315
             ./modules/system
+
             # Home-manager
             inputs.home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
