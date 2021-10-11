@@ -38,6 +38,7 @@
                 imports = [ ./modules/home-manager ];
               };
             }
+
           ];
         };
       };
