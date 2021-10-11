@@ -41,39 +41,34 @@
       };
 
       hooks = [
-				# kak-lsp
-				{
-					name = "WinSetOption";
-					option = "filetype=(sh|javascript|typescript|nix)";
-					commands = "lsp-enable-window";
-				}
+        # kak-lsp
+        {
+          name = "WinSetOption";
+          option = "filetype=(sh|javascript|typescript|nix)";
+          commands = "lsp-enable-window";
+        }
       ];
     };
 
-    extraConfig = ''
-    	# Plugin Manager: Cork
-      # ────────────────────────────────────────────────────
-      evaluate-commands %sh{
-				plugins="$kak_config/plugins"
-				mkdir -p "$plugins"
-				[ ! -e "$plugins/plug.kak" ] && \
-  				git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
-				printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
-      }
+		extraConfig = ''
+		  # Plugin Manager
+		  # ────────────────────────────────────────────────────
+		  source "%val{config}/plugins/plug.kak/rc/plug.kak"
+		  plug "andreyorst/plug.kak" noload
 
-			# Load Modules
+      # Load Modules
       # ────────────────────────────────────────────────────
-			require-module prelude
+      require-module prelude
       require-module connect
 
-			# Windowing
+      # Windowing
       # ────────────────────────────────────────────────────
       # alacritty-integration-enable
 
       # Clipboard
       # ────────────────────────────────────────────────────
-			# synchronize-clipboard
-			# synchronize-buffer-directory-name-with-register d
+      # synchronize-clipboard
+      # synchronize-buffer-directory-name-with-register d
 
       # Options
       # ────────────────────────────────────────────────────
@@ -99,21 +94,21 @@
       # Plugins
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "alexherbo2/lib.kak" config %{
-				enable-detect-indent
-      	enable-auto-indent
-      	set global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
-      	make-directory-on-save
+        enable-detect-indent
+        enable-auto-indent
+        set global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
+        make-directory-on-save
       }
      
       # Auto-pairing of characters
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "alexherbo2/auto-pairs.kak" config %{
-				enable-auto-pairs
+        enable-auto-pairs
       }
       # Fuzzy-Finder
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "andreyorst/fzf.kak" config %{
-      	map global normal <c-p> ': fzf-mode<ret>'
+        map global normal <c-p> ': fzf-mode<ret>'
       }
       
       # Vertical-Selection
@@ -129,7 +124,7 @@
       # Emmet
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "JJK96/kakoune-emmet" config %{
-      	map global insert <a-e> "<esc>x: emmet<ret>"
+        map global insert <a-e> "<esc>x: emmet<ret>"
       }
 
     '';
