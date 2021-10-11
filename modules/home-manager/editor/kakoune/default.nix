@@ -19,7 +19,8 @@
       indentWidth = 2;
 
       showMatching = true;
-
+      showWhitespace.enable = true;
+      
       scrollOff.lines = 5;
       scrollOff.columns = 1;
 
@@ -50,11 +51,11 @@
       ];
     };
 
-		extraConfig = ''
-		  # Plugin Manager
-		  # ────────────────────────────────────────────────────
-		  source "%val{config}/plugins/plug.kak/rc/plug.kak"
-		  plug "andreyorst/plug.kak" noload
+    extraConfig = ''
+      # Plugin Manager
+      # ────────────────────────────────────────────────────
+      source "%val{config}/plugins/plug.kak/rc/plug.kak"
+      plug "andreyorst/plug.kak" noload
 
       # Load Modules
       # ────────────────────────────────────────────────────
