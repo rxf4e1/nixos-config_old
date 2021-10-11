@@ -19,7 +19,7 @@
       tabStop = 2;
       indentWidth = 2;
 
-			showMatching = true;
+      showMatching = true;
 			
       scrollOff.lines = 8;
       scrollOff.columns = 4;
