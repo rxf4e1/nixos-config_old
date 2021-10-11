@@ -2,10 +2,12 @@
 {
   programs.kakoune = {
     enable = true;
+
     plugins = [
-      { _type = "literalExpression"; text = "[ pkgs.kakounePlugins.kak-fzf ]"; }
-      { _type = "literalExpression"; text = "[ pkgs.kakounePlugins.powerline-kak ]"; }
+      pkgs.kakounePlugins.kak-fzf
+      pkgs.kakounePlugins.powerline-kak
     ];
+
     config = {
       colorScheme = "gruvbox";
       autoReload = "ask";
@@ -20,18 +22,26 @@
       numberLines = {
         enable = true;
         relative = false;
-        separator = "|";
+        # separator = "|";
       };
 
       ui = {
         enableMouse = true;
-        assistant = "cat";
+        assistant = "none";
         statusLine = "bottom";
       };
-
+      
+      wrapLines = {
+        enable = false;
+        indent = true;
+        marker = "⏎";
+      };
+      
       # keyMappings = {};
-
-
     };
+
+    extraConfig = ''
+      powerline-start
+    '';
   };
 }
