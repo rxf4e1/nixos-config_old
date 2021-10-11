@@ -80,9 +80,9 @@
 
       # LSP server
       # ────────────────────────────────────────────────────
-     	eval %sh{kak-lsp --kakoune -s $kak_session}
+      eval %sh{kak-lsp --kakoune -s $kak_session}
 
-     	# Enable <tab>/<s-tab> for insert completion selection
+      # Enable <tab>/<s-tab> for insert completion selection
       # ────────────────────────────────────────────────────
       hook global InsertCompletionShow .* %{ map window insert <tab> <c-n>; map window insert <s-tab> <c-p> }
       hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
