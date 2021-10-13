@@ -5,7 +5,7 @@
     settings = {
       background_opacity = 0.96;
       font = {
-        size = 10;
+        size = 10.5;
         normal.family = "TerminessTTF Nerd Font Mono";
         bold.family = "TerminessTTF Nerd Font Mono";
         italic.family = "TerminessTTF Nerd Font Mono";
@@ -16,8 +16,8 @@
       };
       window = {
         padding = {
-          x = 1;
-          y = 1;
+          x = 0;
+          y = 0;
         };
         decorations = "none";
       };
