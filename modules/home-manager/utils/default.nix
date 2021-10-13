@@ -24,10 +24,10 @@
 
     fzf = {
       enable = true;
-      changeDirWidgetCommand = "fd --color always --type d";
+      changeDirWidgetCommand = "fd --color=auto --type=d";
       changeDirWidgetOptions = [ "--preview 'exa --tree --color=always -L 4 {}'" ];
-      defaultCommand = "fd --color always";
-      fileWidgetCommand = "fd --color always --type f";
+      defaultCommand = "fd --color=auto";
+      fileWidgetCommand = "fd --color=auto --type=f";
       fileWidgetOptions = [ "--preview 'head -n 100 {}'" ];
       enableZshIntegration = true;
     };
