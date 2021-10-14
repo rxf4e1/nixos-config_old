@@ -11,6 +11,7 @@
     shell = "${pkgs.zsh}/bin/zsh";
 
     extraConfig = ''
+			set-option -g status off
 			set-option -s -g escape-time 0
 			set-option -g base-index 1
 			set-option -w -g pane-base-index 1
