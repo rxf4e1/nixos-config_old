@@ -76,7 +76,7 @@ in {
 
           keybindings = {
             # Basics
-            "${cfg.modifier}+Return"    = "exec ${cfg.terminal}";
+            "${cfg.modifier}+Return"    = "exec ${cfg.terminal} -vvv --command tmux";
             "${cfg.modifier}+Shift+q"   = "kill";
             "${cfg.modifier}+d"         = "exec ${cfg.menu}";
             "${cfg.modifier}+Control+r" = "reload";
