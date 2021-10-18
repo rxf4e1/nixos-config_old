@@ -27,7 +27,7 @@
       numberLines = {
         enable = true;
         relative = true;
-        # separator = "|";
+        separator = "⋅"; # ⋮ ⦙ ⋅ ∘ ⌋ ∣
       };
 
       ui = {
@@ -79,7 +79,7 @@
 
       # Plugins
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "alexherbo2/alacritty.kak" config %{
+      plug "https://github.com/alexherbo2/alacritty.kak" config %{
         alacritty-integration-enable
       }
       plug "alexherbo2/lib.kak" config %{
@@ -91,28 +91,28 @@
 
       # Powerline
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "andreyorst/powerline.kak" defer powerline %{
+      plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
         set-option global powerline_ignore_warnings true
         set-option global powerline_format 'git line_column bufname smarttab mode_info filetype client session position'
-        # set-option global powerline_separator "║"
-        # set-option global powerline_separator_thin ""
+        set-option global powerline_separator ""
+        set-option global powerline_separator_thin ""
       } defer powerline_bufname %{
-        set-option global powerline_shorten_bufname "short"
-      } defer powerline_base16_gruvbox %{
-            powerline-theme base16-gruvbox
+        	set-option global powerline_shorten_bufname "short"
+      } defer powerline_gruvbox %{
+        	powerline-theme gruvbox
       } config %{
           powerline-start
       }
 
       # Auto-Pairing
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "alexherbo2/auto-pairs.kak" config %{
+      plug "https://github.com/alexherbo2/auto-pairs.kak" config %{
         enable-auto-pairs
       }
 
       # KakTreeFM
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "andreyorst/kaktree" defer kaktree %{
+      plug "https://github.com/andreyorst/kaktree" defer kaktree %{
         map global user 'f' ": kaktree-toggle<ret>" -docstring "toggle filetree panel"
         set-option global kaktree_show_help false
         %{
@@ -136,33 +136,33 @@
 
       # Smart-Tab
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "andreyorst/smarttab.kak" defer smarttab %{
+      plug "https://github.com/andreyorst/smarttab.kak" defer smarttab %{
         set-option global softtabstop 2
         set-option global smarttab_expandtab_mode_name   '⋅a⋅'
         set-option global smarttab_noexpandtab_mode_name '→a→'
         set-option global smarttab_smarttab_mode_name    '→a⋅'
       } config %{
-        hook global WinSetOption filetype=(lua|markdown|kak|lisp|scheme|sh|perl) expandtab
-        hook global WinSetOption filetype=(makefile|gas) noexpandtab
-        hook global WinSetOption filetype=(c|cpp) smarttab
+        	hook global WinSetOption filetype=(lua|markdown|kak|lisp|scheme|sh|perl) expandtab
+        	hook global WinSetOption filetype=(makefile|gas) noexpandtab
+        	hook global WinSetOption filetype=(c|cpp) smarttab
       }
      
       # Fuzzy-Finder
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "andreyorst/fzf.kak" config %{
+      plug "https://github.com/andreyorst/fzf.kak" config %{
         map global normal <c-p> ': fzf-mode<ret>'
       }
       
       # Snippets
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "occivink/kakoune-snippets" config %{
+      plug "https://github.com/occivink/kakoune-snippets" config %{
         # set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
       }
-      # plug "andreyorst/kakoune-snippet-collection"
+      # plug "https://github.com/andreyorst/kakoune-snippet-collection"
 
       # Emmet
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "JJK96/kakoune-emmet" config %{
+      plug "https://github.com/JJK96/kakoune-emmet" config %{
         map global insert <a-e> "<esc>x: emmet<ret>"
       }
 

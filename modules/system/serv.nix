@@ -23,7 +23,7 @@
       layout = "br";
       xkbVariant = "abnt2";
       libinput = {
-        enable = true;
+        enable = false;
         touchpad = {
           tapping = false;
         };
