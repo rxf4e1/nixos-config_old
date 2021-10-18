@@ -2,7 +2,7 @@
 {
   imports = [
     ./emacs
-    ./helix
+    # ./helix
     ./kakoune
     # ./neovim
   ];

@@ -43,8 +43,8 @@
       };
 
       hooks = [
-        # kak-lsp
         {
+        	# kak-lsp
           name = "WinSetOption";
           option = "filetype=(sh|javascript|typescript|lua|nix)";
           commands = "lsp-enable-window";
@@ -73,7 +73,9 @@
 
       # LSP Server
       # ────────────────────────────────────────────────────
-      eval %sh{kak-lsp --kakoune -s $kak_session}
+      try %sh{
+        kak-lsp --kakoune -s $kak_session
+      }
 
       # Plugins
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -92,8 +94,8 @@
       plug "andreyorst/powerline.kak" defer powerline %{
         set-option global powerline_ignore_warnings true
         set-option global powerline_format 'git line_column bufname smarttab mode_info filetype client session position'
-        set-option global powerline_separator "║"
-        set-option global powerline_separator_thin ""
+        # set-option global powerline_separator "║"
+        # set-option global powerline_separator_thin ""
       } defer powerline_bufname %{
         set-option global powerline_shorten_bufname "short"
       } defer powerline_base16_gruvbox %{

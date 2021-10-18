@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# machine_id="aspire-a315";
-
 machine_id="$(uname -n)";
 
 update_() {
