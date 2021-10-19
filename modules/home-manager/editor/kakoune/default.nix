@@ -7,6 +7,9 @@
       kak-lsp
       kakounePlugins.prelude-kak
       kakounePlugins.connect-kak
+      kakounePlugins.auto-pairs-kak
+      kakounePlugins.kakoune-buffer-switcher
+      kakounePlugins.kakboard
       kakounePlugins.kakoune-vertical-selection
     ];
 
@@ -27,7 +30,7 @@
       numberLines = {
         enable = true;
         relative = true;
-        separator = "⋅"; # ⋮ ⦙ ⋅ ∘ ⌋ ∣
+        separator = ''" "''; # ⋮ ⦙ ⋅ ∘ ⌋ ∣
       };
 
       ui = {
@@ -39,15 +42,64 @@
       wrapLines = {
         enable = false;
         indent = true;
-        marker = "⏎";
+        marker = "⎁";
       };
 
       hooks = [
+        # kak-lsp
         {
-        	# kak-lsp
+          commands = "lsp-enable-window";
           name = "WinSetOption";
           option = "filetype=(sh|javascript|typescript|lua|nix)";
-          commands = "lsp-enable-window";
+        }
+        # auto-pairs
+        {
+          commands = "auto-pairs-enable";
+          name = "WinCreate";
+          option = ".*";
+        }
+        # nix
+        {
+          commands = ''
+          	set-option buffer formatcmd nixfmt
+          '';
+          name = "WinCreate";
+          option = ".*.nix";
+        }
+        {
+          commands = "format";
+          name = "BufWritePre";
+          option = ".*.nix";
+        }
+        # kakboard
+        {
+          commands = "kakboard-enable";
+          name = "WinCreate";
+          option = ".*";
+        }
+      ];
+
+      keyMappings = [
+        # vertical-selection
+        {
+        	mode = "user";
+        	key = "v";
+        	effect = ": vertical-selection-down<ret>";
+        	docstring = "vertical selection down";
+        }
+        
+        {
+        	mode = "user";
+        	key = "<a-v>";
+        	effect = ": vertical-selection-up<ret>";
+        	docstring = "vertical selection up";
+        }
+        
+        {
+        	mode = "user";
+        	key = "V";
+        	effect = ": vertical-selection-up-and-down<ret>";
+        	docstring = "vertical selection up and down";
         }
       ];
     };
@@ -55,15 +107,16 @@
     extraConfig = ''
       # Plugin Manager
       # ────────────────────────────────────────────────────
-      source "%val{config}/plugins/plug.kak/rc/plug.kak"
-      plug "andreyorst/plug.kak" noload
+      # source "%val{config}/plugins/plug.kak/rc/plug.kak"
+      # plug "andreyorst/plug.kak" noload
 
       # Loads & Sources
       # ────────────────────────────────────────────────────
+      source "%val{config}/modules/plugins.kak"
+      source "%val{config}/kakrc.local"
+
       require-module prelude
       require-module connect
-
-      source "%val{config}/kakrc.local"
 
       # Default Options
       # ────────────────────────────────────────────────────
@@ -102,12 +155,6 @@
         	powerline-theme gruvbox
       } config %{
           powerline-start
-      }
-
-      # Auto-Pairing
-      # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-      plug "https://github.com/alexherbo2/auto-pairs.kak" config %{
-        enable-auto-pairs
       }
 
       # KakTreeFM
