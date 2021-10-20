@@ -2,17 +2,15 @@
 {
   programs.kakoune = {
     enable = true;
-
     plugins = with pkgs; [
       kak-lsp
       kakounePlugins.prelude-kak
       kakounePlugins.connect-kak
-      kakounePlugins.auto-pairs-kak
-      kakounePlugins.kakoune-buffer-switcher
+      # kakounePlugins.auto-pairs-kak
+      kakounePlugins.kakoune-buffers
       kakounePlugins.kakboard
       kakounePlugins.kakoune-vertical-selection
     ];
-
     config = {
       colorScheme = "gruvbox";
       autoReload = "ask";
@@ -35,7 +33,7 @@
 
       ui = {
         enableMouse = true;
-        # assistant = "none";
+        assistant = "none";
         statusLine = "bottom";
       };
       
@@ -52,9 +50,8 @@
           name = "WinSetOption";
           option = "filetype=(sh|javascript|typescript|lua|nix)";
         }
-        # auto-pairs
         {
-          commands = "auto-pairs-enable";
+          commands = "enable-auto-pairs";
           name = "WinCreate";
           option = ".*";
         }
@@ -105,14 +102,18 @@
     };
 
     extraConfig = ''
-      # Plugin Manager
+      # Plug
       # ────────────────────────────────────────────────────
-      # source "%val{config}/plugins/plug.kak/rc/plug.kak"
-      # plug "andreyorst/plug.kak" noload
+      evaluate-commands %sh{
+        plugins="$kak_config/plugins"
+        mkdir -p "$plugins"
+        [ ! -e "$plugins/plug.kak" ] && \
+          git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+          printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+      }
+      plug "andreyorst/plug.kak" noload      # Loads & Sources
 
-      # Loads & Sources
       # ────────────────────────────────────────────────────
-      source "%val{config}/modules/plugins.kak"
       source "%val{config}/kakrc.local"
 
       require-module prelude
@@ -130,18 +131,34 @@
         kak-lsp --kakoune -s $kak_session
       }
 
+      # Auto-Pairs
+      # ────────────────────────────────────────────────────
+      plug "https://github.com/alexherbo2/auto-pairs.kak"
+
       # Plugins
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "https://github.com/alexherbo2/alacritty.kak" config %{
         alacritty-integration-enable
       }
-      plug "alexherbo2/lib.kak" config %{
+      plug "https://github.com/alexherbo2/lib.kak" config %{
         enable-detect-indent
         enable-auto-indent
         set global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
         make-directory-on-save
       }
-
+      
+      # Buffers
+      # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+      try %{
+        map global normal ^ q
+      	map global normal <a-^> Q
+      	map global normal q b
+      	map global normal Q B
+      	map global normal <a-q> <a-b>
+      	map global normal <a-Q> <a-B>
+      	map global normal b ': enter-buffers-mode<ret>' -docstring 'buffers'
+      	map global normal B ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
+      }
       # Powerline
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
@@ -162,15 +179,13 @@
       plug "https://github.com/andreyorst/kaktree" defer kaktree %{
         map global user 'f' ": kaktree-toggle<ret>" -docstring "toggle filetree panel"
         set-option global kaktree_show_help false
-        %{
-          set-option global kaktree_double_click_duration "0.5"
-          set-option global kaktree_indentation 1
-          set-option global kaktree_dir_icon_open  "▾ 🗁 "
-          set-option global kaktree_dir_icon_close "▸ 🗀 "
-          set-option global kaktree_file_icon      "⠀⠀🖺"
-          set-option global kaktree_split vertical
-          set-option global kaktree_size 30%
-        }
+        set-option global kaktree_double_click_duration "0.5"
+        set-option global kaktree_indentation 1
+        set-option global kaktree_dir_icon_open  "▾ 🗁 "
+        set-option global kaktree_dir_icon_close "▸ 🗀 "
+        set-option global kaktree_file_icon      "⠀⠀🖺"
+        set-option global kaktree_split vertical
+        set-option global kaktree_size 30%
       } config %{
         hook global WinSetOption filetype=kaktree %{
           remove-highlighter buffer/numbers
@@ -181,7 +196,7 @@
         kaktree-enable
       }
 
-      # Smart-Tab
+      # SmartTab
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "https://github.com/andreyorst/smarttab.kak" defer smarttab %{
         set-option global softtabstop 2
@@ -197,7 +212,7 @@
       # Fuzzy-Finder
       # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       plug "https://github.com/andreyorst/fzf.kak" config %{
-        map global normal <c-p> ': fzf-mode<ret>'
+        	map global normal <c-p> ': fzf-mode<ret>' -docstring "fzf mode"
       }
       
       # Snippets

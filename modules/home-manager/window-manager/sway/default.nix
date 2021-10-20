@@ -159,8 +159,7 @@ in {
 
           assigns = {
             "1: www"   = [ { app_id = "org.qutebrowser.qutebrowser"; } ];
-            # "2" = [ { app_id = ""; } ];
-            "3: edit"  = [ { app_id = "emacs"; } ];
+            "2: edit"  = [ { app_id = "emacs"; } ];
             "10: xxx"  = [ { class = "Brave-browser"; } ];
           };
 
