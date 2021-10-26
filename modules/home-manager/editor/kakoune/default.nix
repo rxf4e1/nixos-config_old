@@ -6,7 +6,6 @@
       kak-lsp
       kakounePlugins.prelude-kak
       kakounePlugins.connect-kak
-      # kakounePlugins.auto-pairs-kak
       kakounePlugins.kakoune-buffers
       kakounePlugins.kakboard
       kakounePlugins.kakoune-vertical-selection
@@ -99,6 +98,7 @@
         	docstring = "vertical selection up and down";
         }
       ];
+
     };
 
     extraConfig = ''

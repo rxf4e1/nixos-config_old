@@ -13,6 +13,8 @@
     extraConfig = ''
 			set-option -g status off
 			set-option -w -g status-position top
+      set-option -g status-bg default
+      set-option -g status-fg colour240
 			set-option -s -g escape-time 0
 			set-option -g base-index 1
 			set-option -w -g pane-base-index 1
@@ -24,6 +26,7 @@
 			
 			# Enter command mode
 			bind-key Enter command-prompt
+      # bind-key C-s set-option -g status
     '';
   };
 }
