@@ -25,7 +25,7 @@
       libinput = {
         enable = false;
         touchpad = {
-          tapping = false;
+          tapping = true; #false;
         };
       };
       displayManager = {

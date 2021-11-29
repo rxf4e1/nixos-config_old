@@ -11,6 +11,7 @@
     poppler
     ripgrep
     zathura
+    gimp
   ];
 
   programs = {
