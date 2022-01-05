@@ -7,7 +7,7 @@ let
   fontConf = {
     names = [ "TerminessTTF Nerd Font Mono" ];
     style = "Normal";
-    size = 10.0;
+    size = 9.0;
   };
 
   wallpaper = "/media/data/10-19-docs/12-images/wallpapers/cyberpunk_2077.jpg";
@@ -152,9 +152,11 @@ in {
             "--locked XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
             "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+
             # Start Programs
-            "${cfg.modifier}+q" = "exec qutebrowser";
-            "${cfg.modifier}+Shift+Return" = ''exec emacsclient -c -a "" "$@"'';
+            "${cfg.modifier}+q" = "exec ${pkgs.qutebrowser}/bin/qutebrowser";
+            # "${cfg.modifier}+Shift+Return" = ''exec emacsclient -c -a "" "$@"'';
+            "${cfg.modifier}+Shift+Return" = "exec ${pkgs.emacs}/bin/emacs";
           };
 
           assigns = {

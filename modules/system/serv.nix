@@ -26,6 +26,13 @@
         enable = true;    # false;
         touchpad = {
           tapping = true; # false;
+          disableWhileTyping = true;
+          sendEventsMode = "disabled-on-external-mouse";
+          accelProfile = "flat";
+          accelSpeed = "minSpeed";
+          clickMethod = "clickfinger";
+          scrollMethod = "twofinger";
+          naturalScrolling = true;
         };
       };
       displayManager = {
