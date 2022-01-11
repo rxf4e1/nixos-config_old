@@ -5,5 +5,6 @@
     # ./helix
     ./kakoune
     # ./neovim
+    ./obsidian
   ];
 }
